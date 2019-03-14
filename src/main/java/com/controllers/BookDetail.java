@@ -51,7 +51,7 @@ public class BookDetail extends HttpServlet {
         
         request.setAttribute("oneBook", book);
         request.setAttribute("topics", topics);
-        request.getRequestDispatcher("bookdetail.jsp").forward(request, response);
+        request.getRequestDispatcher("app/bookdetail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

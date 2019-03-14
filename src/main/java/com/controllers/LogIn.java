@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,6 +38,8 @@ public class LogIn extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         
+//        Creamos la sesion
+        HttpSession isAuthenticated = request.getSession();
 //        Obtenemos los valores de los input de:
 //        usuario y contrasena
         String userName, password;
@@ -52,7 +55,7 @@ public class LogIn extends HttpServlet {
 //        Si el usuario es nulo, entonces no existe
         if (user == null) {
             System.out.println("El usuario no existe");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
 //            Si existe el usuario
             System.out.println("Si existe");
@@ -61,12 +64,13 @@ public class LogIn extends HttpServlet {
 //            Usuario y contrasena son correctos    
                 System.out.println("Si esta correcto");
 //                request.getRequestDispatcher("Books").forward(request, response);
-                response.sendRedirect("Books");
+                isAuthenticated.setAttribute("isAuthenticated", true);
+                request.getRequestDispatcher("Books").forward(request,response);
                 
             } else {
 //                Contrasena incorrecta
                 System.out.println("contraseña incorrecta");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
             
         }

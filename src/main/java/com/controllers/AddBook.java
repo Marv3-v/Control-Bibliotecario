@@ -38,15 +38,16 @@ public class AddBook extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String title = request.getParameter("title");
-        String desc = request.getParameter("description");
-        String topic = request.getParameter("topics");
+        String desc = request.getParameter("description").trim();
+        String topic = request.getParameter("topics").trim();
         
         System.out.println("Tema : " + topic);
         
         Book book = new Book(title,desc,Integer.parseInt(topic));
         if(BookDao.addBook(book)) {
             System.out.println("Query ok!");
-            request.getRequestDispatcher("Books").forward(request, response);
+//            request.getRequestDispatcher("Books").forward(request, response);
+              response.sendRedirect("Books");
         } else {
             System.out.println("Error al insertar libro: ");
         }

@@ -44,7 +44,8 @@ public class AddTopic extends HttpServlet {
         inserted = TopicDao.addTopic(new Topic(topicName,topicDesc));
         if(inserted) {
             System.out.println("Query Ok!");
-            request.getRequestDispatcher("Books").forward(request, response);
+//            request.getRequestDispatcher("Books").forward(request, response);
+               response.sendRedirect("Books");
         } else {
             System.out.println("Error");
         }

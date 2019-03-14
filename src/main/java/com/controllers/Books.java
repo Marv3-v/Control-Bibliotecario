@@ -51,7 +51,10 @@ public class Books extends HttpServlet {
         topics = TopicDao.getTopics();
         
         if(id!= null) {
+            int mitad = books.size()/ 2;
             books = BookDao.getTopicBooks(id);
+            
+            request.setAttribute("mitad",mitad);
         } else {
         books = BookDao.getBooks();
             
@@ -59,10 +62,11 @@ public class Books extends HttpServlet {
             
         
 //        Se agregan a la petición
+        request.setAttribute("id", id);
         request.setAttribute("books", books);
         request.setAttribute("topics", topics);
 //        Se envian
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("app/home.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
