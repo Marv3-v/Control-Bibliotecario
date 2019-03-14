@@ -8,11 +8,25 @@
 
 <!DOCTYPE html>
 <html>
-    <head>       
+    <head>    
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="css/bulma.css">
         <link href="vanilla-calendar-master/dist/vanillaCalendar.css" rel="stylesheet">
         <style>
+            .menu-list {
+                      position: fixed;
+                      width: 100%;
+                      background:#4d4d4d;
+                      top:0;
+                      padding: 10px;
+                      box-sizing: border-box;
+                       z-index: 100;
+                  }
+                  body {
+                    margin: 0;
+                    padding: 0;
+                  }
 		a,
 		a:visited {
 			color: #0A9297;
@@ -45,12 +59,17 @@
         </style>
     </head>
     <body>
-        <p class="button" onclick="location.href='Books'">Volver</p>
+        <nav class="menu-list" style="text-align: right">
+            <button onclick="location.href='Books'" class="button">Libros</button>
+            <button class="button">Renta</button>
+            <button  class="button">Usuarios</button>               
+        </nav>
+        <p class="button" style="margin-left: 3%; margin-top: 5%;" onclick="location.href='Books'">Volver</p>
             <div class="is-rounded" style="margin-top:  20px; display: flex; justify-content: space-around; flex-wrap: wrap">
                 <div class="is-mobile card" style="width: 300px">
                           <div class="card-image">
                             <figure class="image is-4by3">
-                              <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                              <img src="img/pexel.jpeg" alt="Placeholder image">
                             </figure>
                           </div>
                           <div class="card-content">
