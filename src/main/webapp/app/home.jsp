@@ -10,14 +10,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Libros</title>
+        <title>Agregar autoincrement a Customer</title>
         <link rel="stylesheet" href="css/bulma.css">
         <style>
             .parallax {
                      /*The image used*/ 
                     background-image: url("img/books.jpg");
 
-                    min-height: 550px; 
+                    min-height: 540px; 
  
                     background-attachment: fixed;
                     background-position: center;
@@ -26,13 +26,13 @@
                   }
                   
                   .menu-list {
-                      position: fixed;
-                      width: 100%;
+                   
+                   
                       background:#4d4d4d;
-                      top:0;
+/*                      top:0;
                       padding: 10px;
                       box-sizing: border-box;
-                       z-index: 100;
+                       z-index: 100;*/
                   }
                   body {
                     margin: 0;
@@ -50,20 +50,53 @@
                        border: none;
                   }
                   
+                  .best {
+                       background:#4d4d4d;
+                       /*background-color: brown;*/
+                       
+                       
+                  }
+                  
                   
         </style>
     </head>
     <body>
-        <nav class="menu-list" style="text-align: right">
+<!--        <nav class="navbar is-fixed-top menu-list" style="text-align: right">
             <button onclick="location.href='Books'" class="button">Libros</button>
-            <button class="button">Renta</button>
             <button  class="button">Usuarios</button> 
             <button class="button" onClick="location.href='LogOut'">Cerrar</button>
-        </nav>
-        
+        </nav>-->
+        <nav class="navbar is-fixed-top best" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      <button onclick="location.href='Books'" class="button">Libros</button>
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true" style="color: white"></span>
+      <span aria-hidden="true" style="color: white"></span>
+      <span aria-hidden="true" style="color: white"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-light">
+            Usuarios
+          </a>
+          <a class="button is-light">
+            Cerrar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
         <div class="parallax" style="">
             <nav class="" style="width: 100%">
-                    <div style="margin-top: 4%;padding: 70px;">
+                    <div style="margin-top: 3%;padding: 70px;">
                    
                     <button style="width: 150px;height: 40px;" onClick="location.href='app/insertTopic.jsp'" class="button btn">Ingresar tema</button>
                     <div style="overflow-y:auto; height: 300px"> 
@@ -95,13 +128,13 @@
                             </figure>
                           </div>
                           <div class="card-content">
-                            <div class="media">
-                              
+                            <div class="media">              
                               <div class="media-content">
                                 <p class="title is-4">${book.title}</p>
                                 <p class="subtitle is-6">${book.topicName}</p>
                                 <!--Aqui ira onClick con el id del libro como url-->
-                                <button class="button is-small" style="color: white; background: #4d4d4d" onClick="location.href='BookDetail?libro=${book.title}&id=${book.id}'">Detalle</button>
+         <button class="button is-small" style="color: white; background: #4d4d4d" 
+                 onClick="location.href='BookDetail?libro=${book.title}&id=${book.id}'">Detalle</button>
                               </div>
                             </div>
                           </div>
@@ -109,5 +142,16 @@
                 </div>
             </c:forEach>
             </div>
+            <script>
+                (function() {
+  var burger = document.querySelector('.burger');
+  var nav = document.querySelector('#'+burger.dataset.target);
+ 
+  burger.addEventListener('click', function(){
+    burger.classList.toggle('is-active');
+    nav.classList.toggle('is-active');
+  });
+})();
+            </script>
     </body>
 </html>

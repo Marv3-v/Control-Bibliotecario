@@ -56,17 +56,49 @@
 		.demo-picked span {
 			font-weight: bold;
 		}
+                
+                .best {
+                       background:#4d4d4d;
+                       /*background-color: brown;*/
+                       
+                       
+                  }
         </style>
     </head>
     <body>
-        <nav class="menu-list" style="text-align: right">
-            <button onclick="location.href='Books'" class="button">Libros</button>
-            <button class="button">Renta</button>
-            <button  class="button">Usuarios</button>               
-        </nav>
+        <nav class="navbar is-fixed-top best" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item">
+      <button onclick="location.href='Books'" class="button">Libros</button>
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true" style="color: white"></span>
+      <span aria-hidden="true" style="color: white"></span>
+      <span aria-hidden="true" style="color: white"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-light">
+            Usuarios
+          </a>
+          <a class="button is-light">
+            Cerrar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+        
         <p class="button" style="margin-left: 3%; margin-top: 5%;" onclick="location.href='Books'">Volver</p>
             <div class="is-rounded" style="margin-top:  20px; display: flex; justify-content: space-around; flex-wrap: wrap">
-                <div class="is-mobile card" style="width: 300px">
+                <div class="is-mobile card" style="width: 300px; margin-bottom: 30px;">
                           <div class="card-image">
                             <figure class="image is-4by3">
                               <img src="img/pexel.jpeg" alt="Placeholder image">
@@ -77,13 +109,22 @@
                               <div class="media-content">
                                 <p class="title is-4">${oneBook.title}</p>
                                 <p class="subtitle is-6">${oneBook.topicName}</p>
-                                <p class="subtitle is-6"><b>Descripción:</b> ${oneBook.description}</p>            
-                                <p class="subtitle is-6"><b>Estado:</b> ${oneBook.yesNoRented}</p>
+                                <p class="subtitle is-6"><b>Descripción:</b> ${oneBook.description}</p> 
+                                <p class="subtitle is-6"><b>Unidades: </b>${oneBook.units}</p>
+                                <p class="subtitle is-6"><b>Disponibles actualmente: </b>${oneBook.availableUnits}</p>
+                                <p class="subtitle is-6"><b>Estado: </b>${oneBook.yesNoActive}</p>
+                                
+                                <input type="hidden" name="idB" value="${oneBook.id}">
+                                <button class="button is-primary" style="color: white; background: #4d4d4d" onClick="location.href='RentForm?libro=${oneBook.title}&id=${oneBook.id}'">Rentar libro</button>
                               </div>
                             </div>
                           </div>                         
                 </div>
-                <form action="UpdateBook" method="post" class="is-mobile" style="width: 350px">     
+               <div>
+                                    
+                                
+                <form action="UpdateBook" method="post" class="is-mobile" style="width: 100%">     
+                    <h3 class="title is-4">Actualización</h3>
                     <div> 
                         <input type="hidden" name="idB" value="${oneBook.id}">
                     <label for="updatedTitle">Título</label>
@@ -101,11 +142,28 @@
                             <option selected hidden disabled>${oneBook.topicName}</option>
                         </c:forEach>
                         </select>
+                        <br>   
                     </div>
-                    <span>
+                     <span>
                     <button class="button is-primary is-size-6-mobile">Actualizar</button>
-                    </span>   
+                    </span>
+                    
+                      
                 </form>
+                    <br>
+                   
+                    <br>
+                <form action="UpdateUnits" method="post" style="width: 70%" >
+                    <input type="hidden" name="id" value="${idBook}">
+                    <label for="newUnits">Agregar unidades</label>
+                    <div style="display: flex;">
+                    <input required name="newUnits" type="number" min="0" step="1" class="input" style="margin-top: 20px; margin-bottom: 20px">
+                    <span style="margin-top: 20px; margin-bottom: 20px">
+                    <button class="button is-primary is-size-6-mobile" >Actualizar</button>
+                    </span>
+                    </div>
+                </form>
+                                </div>
             </div>
 
             
@@ -113,7 +171,7 @@
                     
                     
                     
-        <div class="container2">    
+<!--        <div class="container2">    
 			<g fill="none">
 				<path d="M77.877 47.673a6.515 6.515 0 0 1-1.912 4.619 6.515 6.515 0 0 1-4.618 1.912H8.653a6.53 6.53 0 0 1-4.618-11.149 6.515 6.515 0 0 1 4.618-1.912h3.918a6.53 6.53 0 0 1-4.618-11.149 6.515 6.515 0 0 1 4.619-1.912h3.918a6.53 6.53 0 0 1-4.618-11.15 6.515 6.515 0 0 1 4.618-1.911h2.613c0-7.213 5.848-13.062 13.06-13.062H60.9a13.02 13.02 0 0 1-3.828 9.234 13.02 13.02 0 0 1-9.234 3.828h15.674a6.53 6.53 0 0 1 4.618 11.148 6.515 6.515 0 0 1-4.619 1.913h3.919a6.53 6.53 0 0 1 4.618 11.149 6.515 6.515 0 0 1-4.618 1.912h3.918a6.53 6.53 0 0 1 6.53 6.53z"
 				  fill="#FFF" />
@@ -172,14 +230,25 @@
 			<a href="https://github.com/chrisssycollins">@chrisssycollins</a> |
 			<a href="https://github.com/chrisssycollins/vanilla-calendar">View on GitHub</a>
 		</footer>
-	</div>
-	<script src="vanilla-calendar-master/dist/vanillaCalendar.js" type="text/javascript"></script>
-	<script>
+	</div>-->
+	<!--<script src="vanilla-calendar-master/dist/vanillaCalendar.js" type="text/javascript"></script>-->
+<!--	<script>
 		window.addEventListener('load', function () {
 			vanillaCalendar.init({
 				disablePastDays: true
 			});
 		})
-	</script>
+	</script>-->
+        <script>
+                (function() {
+  var burger = document.querySelector('.burger');
+  var nav = document.querySelector('#'+burger.dataset.target);
+ 
+  burger.addEventListener('click', function(){
+    burger.classList.toggle('is-active');
+    nav.classList.toggle('is-active');
+  });
+})();
+        </script>
     </body>
 </html>
