@@ -27,7 +27,7 @@ public class Conexion {
     
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
          Class.forName("com.mysql.jdbc.Driver");
-        stringConexion = "jdbc:mysql://localhost/library?useSSL=FALSE&allowPublicKeyRetrieval=true";
+        stringConexion = "jdbc:mysql://localhost/biblioteca?useSSL=FALSE&allowPublicKeyRetrieval=true";
         con = DriverManager.getConnection(stringConexion,"root","1234");
         connected = true; 
         return con;
