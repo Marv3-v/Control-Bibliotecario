@@ -5,12 +5,11 @@
  */
 package com.controllers;
 
-import com.daos.BookDao;
-import com.daos.TopicDao;
-import com.models.Book;
-import com.models.Topic;
+import com.daos.CustomerDao;
+import com.models.Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author User
  */
-@WebServlet(name = "BookDetail", urlPatterns = {"/BookDetail"})
-public class BookDetail extends HttpServlet {
+@WebServlet(name = "RentForm", urlPatterns = {"/RentForm"})
+public class RentForm extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,23 +37,25 @@ public class BookDetail extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
+        String idBook = request.getParameter("id").trim();
+        String book = request.getParameter("libro").trim();
         
-        String idBook = request.getParameter("id");
+        request.setAttribute("id", idBook);
+        request.setAttribute("book", book);
         
-        Book book = BookDao.getBook(idBook);
-        System.out.println("Book: " + book.getTitle());
-        List<Topic> topics = new ArrayList<>();   
-        topics = TopicDao.getTopics();
-        int currentUnits = book.getUnits();
-        int currentAvailable = book.getAvailableUnits();
+        try {
         
+            List<Customer> c = new ArrayList<>();
+            c = CustomerDao.getAll();
+            request.setAttribute("customers", c);
+        } catch(SQLException e) {
+            System.out.println("Error al obtener la lista en el Servlet" + e.getMessage());
+        }
         
-        request.setAttribute("oneBook", book);
-        request.setAttribute("idBook", idBook);
-        request.setAttribute("topics", topics);
-        request.getRequestDispatcher("app/bookdetail.jsp").forward(request, response);
+        request.getRequestDispatcher("app/rent.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,8 +72,10 @@ public class BookDetail extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(RentForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BookDetail.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RentForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -89,8 +92,10 @@ public class BookDetail extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(RentForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BookDetail.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RentForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

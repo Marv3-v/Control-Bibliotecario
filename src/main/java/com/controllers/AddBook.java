@@ -37,20 +37,32 @@ public class AddBook extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String title = request.getParameter("title");
+        String title = request.getParameter("title").trim();
         String desc = request.getParameter("description").trim();
         String topic = request.getParameter("topics").trim();
+        String units = request.getParameter("units").trim();
         
         System.out.println("Tema : " + topic);
+        System.out.println("Titulo : " + title);
+        System.out.println("desc : " + desc);
+        System.out.println("units : " + units);
         
-        Book book = new Book(title,desc,Integer.parseInt(topic));
-        if(BookDao.addBook(book)) {
-            System.out.println("Query ok!");
-//            request.getRequestDispatcher("Books").forward(request, response);
-              response.sendRedirect("Books");
+        
+        if(!title.equals("") && !desc.equals("") && !topic.equals("") && !units.equals("")) {
+        
+//            Hacer consulta para saber las unidades disponibles y asi operar al actualizar 
+            Book book = new Book(title,desc,Integer.parseInt(topic),Integer.parseInt(units), Integer.parseInt(units));
+            if(BookDao.addBook(book)) {
+                System.out.println("Query ok!");
+                  response.sendRedirect("Books");
+            } else {
+                System.out.println("Error al insertar libro: ");
+            }
         } else {
-            System.out.println("Error al insertar libro: ");
+            System.out.println("No puedes ingresar vacío");
+            response.sendRedirect("insertBook");
         }
+        
     }
 
 

@@ -38,10 +38,9 @@ public class AddTopic extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String topicName = request.getParameter("topic");
-        String topicDesc = request.getParameter("topicDesc");
         
         boolean inserted;
-        inserted = TopicDao.addTopic(new Topic(topicName,topicDesc));
+        inserted = TopicDao.addTopic(new Topic(topicName));
         if(inserted) {
             System.out.println("Query Ok!");
 //            request.getRequestDispatcher("Books").forward(request, response);

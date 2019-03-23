@@ -65,8 +65,8 @@ public class LogIn extends HttpServlet {
                 System.out.println("Si esta correcto");
 //                request.getRequestDispatcher("Books").forward(request, response);
                 isAuthenticated.setAttribute("isAuthenticated", true);
-                request.getRequestDispatcher("Books").forward(request,response);
-                
+//                request.getRequestDispatcher("Books").forward(request,response);
+                response.sendRedirect("Books");
             } else {
 //                Contrasena incorrecta
                 System.out.println("contraseña incorrecta");

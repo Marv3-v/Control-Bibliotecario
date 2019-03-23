@@ -42,13 +42,15 @@ public class UpdateBook extends HttpServlet {
         String desc = request.getParameter("updatedDesc").trim();
         String idTopic;
         String idT = request.getParameter("idT").trim();
+        
+//        Hacer consulta para saber las unidades disponibles y asi operar al actualizar
         try {
             
         idTopic = request.getParameter("topics").trim();
         
         } catch(Exception e) {
             
-            System.out.println("Es nulo asi que lo agregamos");
+            System.out.println("Es nulo asi que le asignamos este valor");
             idTopic = idT;
             System.out.println("Idtopic :" + idTopic);
         }
@@ -60,14 +62,14 @@ public class UpdateBook extends HttpServlet {
         
         if(idBook != null && title != null && desc != null && idTopic != null) {
 //            No son nulos 
-            if(!"".equals(idBook) && !"".equals(title) && !"".equals(desc) && !"".equals(idTopic)) {
+            if(!" ".equals(idBook) && !"".equals(title) && !"".equals(desc) && !"".equals(idTopic)) {
 //            No estan vacíos
 
                 boolean updated = BookDao.updateBook(idBook, title, desc, idTopic);
                 if(updated) {
                     System.out.println("Exito!, query Ok!");
-                    request.getRequestDispatcher("BookDetail?libro="+title+"&id="+idBook).forward(request, response);
-//                      request.getRequestDispatcher("Books").forward(request, response);
+//                    request.getRequestDispatcher("BookDetail?libro="+title+"&id="+idBook).forward(request, response);
+                      response.sendRedirect("BookDetail?libro="+title+"&id="+idBook);
                 } else {
                     System.out.println("Erro");
                 }
