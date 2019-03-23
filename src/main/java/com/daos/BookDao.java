@@ -26,18 +26,24 @@ import java.util.List;
  */
 public class BookDao {
     
-//    Método para añadir un libro 
+//    Método para añadir un libro
+    /*
+    * Método de la clase Book, utilizado para la creación de un libro
+    * necesita un objeto book
+    */
     public static boolean addBook(Book book) throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;
-        String sql = "insert into book values (null,?,?,?,?)";
+        String sql = "insert into book values(null,?,?,?,?,?,?)";
         try {
             con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getDescription());
-            ps.setBoolean(3, book.isRentedNow());
-            ps.setInt(4, book.getTopicI());
+            ps.setInt(3, book.getTopicI());
+            ps.setBoolean(4, book.isActive());
+            ps.setInt(5, book.getUnits());
+            ps.setInt(6, book.getAvailableUnits());
             ps.executeUpdate();
             con.close();
             ps.close();
@@ -49,12 +55,16 @@ public class BookDao {
         }
     }
     
+    /*
+    * método de la clase Book, sirve para obtener la lista completa de todos los libros
+    * Tipo List<Book>
+    */
     public static List<Book> getBooks() throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;
         ResultSet rs;
         List<Book> books = new ArrayList<>();
-        String sql = "SELECT book.id, book.title, topic.name FROM book, topic WHERE book.id_topic = topic.id";
+        String sql = "SELECT book.id, book.title, book.description, topic.id_topic, topic.name FROM book, topic WHERE book.id_topic = topic.id_topic";
         
         try {
             con = Conexion.getConnection();
@@ -64,8 +74,9 @@ public class BookDao {
                 books.add(new Book(
                         rs.getInt("id"),
                         rs.getString("title"),
+                        rs.getString("description"),
                         new Topic(
-                            rs.getInt("id"),
+                            rs.getInt("id_topic"),
                             rs.getString("name")
                         )
                     ));
@@ -82,6 +93,10 @@ public class BookDao {
         
     }
     
+    /*
+    * Método de la clase Book, sirve para filtrar los libros según el tema
+    * requiere un String idTopic
+    */
     public static List<Book> getTopicBooks(String idTopic) throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;
@@ -89,8 +104,8 @@ public class BookDao {
         List<Book> topicBooks = new ArrayList<>();
         String sql =  "SELECT book.id, book.title, topic.name "
                     + "FROM book, topic "
-                    + "WHERE book.id_topic = topic.id "
-                    + "AND topic.id=?";
+                    + "WHERE book.id_topic = topic.id_topic "
+                    + "AND topic.id_topic=?";
         try {
             con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
@@ -118,14 +133,16 @@ public class BookDao {
         }
     }
     
-    
+    /*
+    * Método de la clase Book, sirve para obtener el detalle de un libro en específico
+    */
     public static Book getBook(String idBook) throws ClassNotFoundException {
        Connection con;
        PreparedStatement ps;
        ResultSet rs;
-       String sql = "select book.id idBook, book.title, book.description, book.rented_now, topic.id, topic.name, topic.description " +
+       String sql = "select book.id id_book, book.title, book.description, book.units, book.available_units, book.is_active, topic.id_topic, topic.name " +
                     "from book,topic " +
-                    "where book.id_topic = topic.id " + 
+                    "where book.id_topic = topic.id_topic " + 
                     "and book.id =?";
        try {
            con = Conexion.getConnection();
@@ -135,14 +152,15 @@ public class BookDao {
            rs.first();
            
            Book book = new Book(
-                   rs.getInt("idBook"),
+                   rs.getInt("id_book"),
                    rs.getString("title"),
                    rs.getString("description"),
-                   rs.getBoolean("rented_now"),
+                   rs.getInt("units"),
+                   rs.getInt("available_units"),
+                   rs.getBoolean("is_active"),
                    new Topic(
-                           rs.getInt("id"),
-                           rs.getString("name"),
-                           rs.getString("description")
+                           rs.getInt("id_topic"),
+                           rs.getString("name")
                    ));
            ps.close();
            con.close();
@@ -156,16 +174,20 @@ public class BookDao {
         
     }
     
+    /*
+    * Método clase Book, utilizado para actualizar un libro
+    * 
+    */
     public static boolean updateBook(String idBook, String newTitle, String newDesc, String newIdTopic) throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;
-        String sql = "UPDATE book SET title=?, description =?, id_topic=? WHERE id=?";
+        String sql = "UPDATE book SET title=?, description=?, id_topic=? WHERE id=?";
         try {
             con = Conexion.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1,newTitle);
             ps.setString(2,newDesc);
-            ps.setString(3,newIdTopic);
+            ps.setString(3,newIdTopic);         
             ps.setString(4,idBook);
             ps.executeUpdate();
             ps.close();
@@ -176,5 +198,40 @@ public class BookDao {
             return false;
         }
     }
+//    En el servlet debo sumar las unidades actuales con las nuevas, lo mismo para las disponibles
+//    Hacer primero la consulta de libros para actualizar las unidades
+//    Este newUnits ya hizo la operación para solo actualizar todo el campo, ya sumó o restó
+    
+    
+    public static boolean updateUnits(int newUnits, int newAvailables, String idBook) throws ClassNotFoundException {
+        Connection con;
+        PreparedStatement ps;
+        String sql = "update book set units=?, available_units=? where id=?";
+        
+        try{
+            con = Conexion.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, newUnits);
+            ps.setInt(2, newAvailables);
+            ps.setString(3, idBook);
+            ps.executeUpdate();
+            ps.close();
+            con.close();
+            return true;
+        } catch(SQLException e) {
+            System.out.println("Error al actualizar las unidades: " + e.getMessage());
+            return false;
+        }
+    }
+    
+//    Hacer posible metodo de eliminar unidades de libros
+//    Solo eliminará las unidades, si existen al menos una en Disponibles.
+//    Si quiere eliminar 3 
+//    Primero ve las DISPONIBLES
+//      Si hay 
+//          entonces mirará el número...
+//          eliminar máximo el número de unidades DISPONIBLES
+//      No hya
+//          No podrá eliminar
  
 }

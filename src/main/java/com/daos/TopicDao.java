@@ -25,12 +25,11 @@ public class TopicDao {
     public static boolean addTopic(Topic topic) throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;
-        String sql = "insert into topic values(null,?,?)";
+        String sql = "insert into topic values(null,?)";
         try {
         con = Conexion.getConnection();
         ps = con.prepareStatement(sql);
         ps.setString(1, topic.getName());
-        ps.setString(2, topic.getTopicDesc());
         ps.executeUpdate();
         ps.close();
         con.close();
@@ -55,9 +54,8 @@ public class TopicDao {
             rs = ps.executeQuery();
             while(rs.next()) {
                 topics.add(new Topic(
-                rs.getInt("id"),
-                rs.getString("name"),
-                rs.getString("description")
+                rs.getInt("id_topic"),
+                rs.getString("name")
                 ));
             }
             ps.close();
