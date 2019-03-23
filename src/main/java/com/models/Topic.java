@@ -13,21 +13,13 @@ public class Topic {
     
     private int topicId;
     private String name;
-    private String topicDesc;
 
-    public Topic(int topicId, String name, String topicDesc) {
+    public Topic(int topicId, String name) {
         this.topicId = topicId;
         this.name = name;
-        this.topicDesc = topicDesc;
     }
     
-     public Topic(String name, String topicDesc) {
-        this.name = name;
-        this.topicDesc = topicDesc;
-    }
-     
-    public Topic(int idTopic, String name) {
-        this.topicId = idTopic;
+     public Topic(String name) {
         this.name = name;
     }
      
@@ -42,14 +34,5 @@ public class Topic {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getTopicDesc() {
-        return topicDesc;
-    }
-
-    public void setTopicDesc(String topicDesc) {
-        this.topicDesc = topicDesc;
-    }
-    
-    
+        
 }

@@ -13,9 +13,12 @@ public class Book {
     private int id;
     private String title;
     private String description;
-    private boolean rentedNow = false;
+    private boolean active = true;
+    private int units;
+    private int availableUnits;
     private int topicId;
     private Topic topic;
+
 
 //    public Book(int id, String title, String description, boolean rentedNow, int topicId) {
 //        this.id = id;
@@ -25,12 +28,15 @@ public class Book {
 //        this.topicId = topicId;
 //    }
 
-    public Book(int id, String title, String description, boolean rentedNow, Topic topic) {
+    public Book(int id, String title, String description, Topic topic) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.rentedNow = rentedNow;
         this.topic = topic;
+    }
+    
+    public Book(int idBook) {
+        this.id = idBook;
     }
 
 //    public Book(String title, String description) {
@@ -44,21 +50,42 @@ public class Book {
         this.topic = topic;
     }
 
-//    public Book(String title, String description, boolean rentedNow, int topicId) {
-//        this.title = title;
-//        this.description = description;
-//        this.rentedNow = rentedNow;
-//        this.topicId = topicId;
-//    }
     
-    /*
-    * Constructor de la clase Book,
-    * sirve para insertar datos / libro a la base de datos
-    */
-    public Book(String title, String description, int topicId) {
+  
+    /**
+     * Método constructor de la clase Book, sirve para el detalle de un libro
+     * @param id
+     * @param title
+     * @param description
+     * @param units
+     * @param availableU
+     * @param active
+     * @param topic 
+     */
+    public Book(int id, String title, String description, int units, int availableU, boolean active, Topic topic ) {
+        this.id = id;
         this.title = title;
         this.description = description;
+        this.units = units;
+        this.availableUnits = availableU;
+        this.active = active;
+        this.topic = topic;
+    }
+
+    /**
+     * Constructor exclusivo para añadir un nuevo libro de la clase Book
+     * @param title
+     * @param desc
+     * @param topicId
+     * @param units
+     * @param availableU 
+     */
+    public Book(String title, String desc, int topicId, int units, int availableU) {
+        this.title = title;
+        this.description = desc;
         this.topicId = topicId;
+        this.units = units;
+        this.availableUnits = availableU;
     }
 
     public int getId() {
@@ -81,20 +108,6 @@ public class Book {
         this.description = description;
     }
 
-    public boolean isRentedNow() {
-        return rentedNow;
-        
-    }
-    
-    public String getYesNoRented() {
-        return (isRentedNow()?"rentado":"disponible");
-        
-    }
-
-    public void setRentedNow(boolean rentedNow) {
-        this.rentedNow = rentedNow;
-    }
-
     public void setTopicId(int topicId) {
         this.topicId = topicId;
     }
@@ -113,6 +126,34 @@ public class Book {
     
     public int getTopicI() {
         return topicId;
+    }
+    
+    public boolean isActive() {
+        return active;
+    }
+    
+    public String getYesNoActive() {
+        return (isActive()?"Activo":"Inactivo");
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public int getUnits() {
+        return units;
+    }
+
+    public void setUnits(int units) {
+        this.units = units;
+    }
+
+    public int getAvailableUnits() {
+        return availableUnits;
+    }
+
+    public void setAvailableUnits(int availableUnits) {
+        this.availableUnits = availableUnits;
     }
     
     
