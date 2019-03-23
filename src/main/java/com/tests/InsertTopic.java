@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class InsertTopic {
     public static void main(String[] args) {
-        Topic topic = new Topic("Ciencia Ficción","genero popular...");
+        Topic topic = new Topic("Ciencia Ficción");
         try {
             if(TopicDao.addTopic(topic)) {
                 System.out.println("Query Ok");

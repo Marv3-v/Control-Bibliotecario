@@ -17,7 +17,8 @@ public class InsertBook {
     
     
     public static void main(String[] args) throws ClassNotFoundException {
-        Book book = new Book("Maze","te pierdes",2);
+        
+        Book book = new Book("Maze","te pierdes",1,5, 5);
         try {
             
         if(BookDao.addBook(book)) {

@@ -15,8 +15,8 @@ import com.models.Topic;
 public class TestTopic {
     
     public static void main(String[] args) {
-        Topic t = new Topic(2,"Misterio","genero que hace volar...");
-        Book b = new Book(1,"titulo","primer libro",false,t);
+        Topic t = new Topic(2,"Misterio");
+        Book b = new Book(1,"titulo","primer libro",t);
         System.out.println(" Id tema : " + b.getTopicId());
     }
 }
