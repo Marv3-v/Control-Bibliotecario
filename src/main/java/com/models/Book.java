@@ -6,7 +6,7 @@
 package com.models;
 
 /**
- *
+ *Clase Book que contiene atributos y métodos necesarios la biblioteca
  * @author User
  */
 public class Book {
@@ -27,7 +27,13 @@ public class Book {
 //        this.rentedNow = rentedNow;
 //        this.topicId = topicId;
 //    }
-
+    /**
+     * Método constructor para obtener la lista de libros
+     * @param id
+     * @param title
+     * @param description
+     * @param topic 
+     */
     public Book(int id, String title, String description, Topic topic) {
         this.id = id;
         this.title = title;
@@ -35,8 +41,15 @@ public class Book {
         this.topic = topic;
     }
     
-    public Book(int idBook) {
+    public Book(int idBook, String title) {
         this.id = idBook;
+        this.title = title;
+    }
+    
+    public Book(int idBook, String title, int availableUnits) {
+        this.id = idBook;
+        this.title = title;
+        this.availableUnits = availableUnits;
     }
 
 //    public Book(String title, String description) {
@@ -44,6 +57,12 @@ public class Book {
 //        this.description = description;
 //    }
     
+    /**
+     * Método que pide 3 parámetros, se usa en conjunto con topic para filtrar libros
+     * @param id
+     * @param title
+     * @param topic 
+     */
     public Book(int id, String title, Topic topic) {
         this.id = id;
         this.title = title;

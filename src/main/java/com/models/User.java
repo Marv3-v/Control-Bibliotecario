@@ -10,6 +10,7 @@ package com.models;
  * @author User
  */
 public class User {
+
     private int id;
     private String userName;
     private String password;
@@ -19,7 +20,13 @@ public class User {
         this.userName = userName;
         this.password = password;
     }
-    
+
+    /**
+     * Constructor que sirve para validar el login
+     *
+     * @param userName
+     * @param password
+     */
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
@@ -44,7 +51,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    
+
 }

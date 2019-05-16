@@ -14,6 +14,11 @@ public class Topic {
     private int topicId;
     private String name;
 
+    /**
+     * Constructor para obtener los temas
+     * @param topicId
+     * @param name 
+     */
     public Topic(int topicId, String name) {
         this.topicId = topicId;
         this.name = name;

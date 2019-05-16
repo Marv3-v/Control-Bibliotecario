@@ -15,8 +15,8 @@ import java.time.LocalDate;
 public class Rented {
     
     private int id;
-    private LocalDate start_date;
-    private LocalDate final_date;
+    private LocalDate startDate;
+    private LocalDate finalDate;
     private int idCustomer;
     private int idBook;
     private int payment;
@@ -27,40 +27,107 @@ public class Rented {
     private Book book;
     
 
-    public Rented(Date start_date, Date final_date, int idBook, int idCustomer, int payment) {
+    public Rented(Date startDate, Date finalDate, int idBook, int idCustomer, int payment) {
        
-        this.start_date = start_date.toLocalDate();
-        this.final_date = final_date.toLocalDate();
+        this.startDate = startDate.toLocalDate();
+        this.finalDate = finalDate.toLocalDate();
         this.idBook = idBook;
         this.idCustomer = idCustomer;
         this.payment = payment;
     }
+    
+    public Rented(Date receivedDate, int idRent) {
+        this.receivedDate = receivedDate.toLocalDate();
+        this.id = idRent;
+    }
+    
+    
+    public Rented(Customer customer) {
+        this.customer = customer;
+    }
 
-    public Rented(Date start_date, Date final_date, Customer customer, Book book) {
-        this.start_date = start_date.toLocalDate();
-        this.final_date = final_date.toLocalDate();
+    public Rented(Date startDate, Date finalDate, Customer customer, Book book) {
+        this.startDate = startDate.toLocalDate();
+        this.finalDate = finalDate.toLocalDate();
         this.customer = customer;
         this.book = book;
     }
 
-    public Rented(int id, Date start_date, Date final_date, int idCustomer, int idBook) {
+    public Rented(int id, Date startDate, Date finalDate, int idCustomer, int idBook) {
         this.id = id;
-        this.start_date = start_date.toLocalDate();
-        this.final_date = final_date.toLocalDate();
+        this.startDate = startDate.toLocalDate();
+        this.finalDate = finalDate.toLocalDate();
         this.idCustomer = idCustomer;
         this.idBook = idBook;
     }
     
-    public Rented(int id, Date start_date, Date final_date, Book book, Customer customer, 
+    
+    /**
+     * Método de la clase Rented que sirve para obtener las rentas que ya han devuelto el libro
+     * @param id
+     * @param startDate
+     * @param finalDate
+     * @param book
+     * @param customer
+     * @param rentCost
+     * @param penaltyFee
+     * @param receivedDate
+     * @param isReceived 
+     */
+//    public Rented(int id, Date startDate, Date finalDate, Book book, Customer customer, 
+//                  int rentCost, boolean isReceived) {
+//        this.id = id;
+//        this.startDate = startDate.toLocalDate();
+//        this.finalDate = finalDate.toLocalDate();
+//        this.book = book;
+//        this.customer = customer;
+//        this.payment = rentCost;
+//        this.isReceived = isReceived;
+//    }
+    
+        /**
+         * Constructor para obtener la lista de rentas donde el libro ya esta devuelta en la biblioteca
+         * @param id
+         * @param startDate
+         * @param finalDate
+         * @param book
+         * @param customer
+         * @param rentCost
+         * @param penaltyFee
+         * @param receivedDate
+         * @param isReceived 
+         */
+        public Rented(int id, Date startDate, Date finalDate, Book book, Customer customer, 
                   int rentCost, int penaltyFee, Date receivedDate, boolean isReceived) {
         this.id = id;
-        this.start_date = start_date.toLocalDate();
-        this.final_date = final_date.toLocalDate();
-        this.idBook = book.getId();
-        this.idCustomer = customer.getId();
+        this.startDate = startDate.toLocalDate();
+        this.finalDate = finalDate.toLocalDate();
+        this.book = book;
+        this.customer = customer;
         this.payment = rentCost;
         this.penaltyFee = penaltyFee;
         this.receivedDate = receivedDate.toLocalDate();
+        this.isReceived = isReceived;
+    }
+    
+    /**
+     * Método constructor de la clase Rented que sirve para obtener las rentas actuales
+     * @param id
+     * @param startDate
+     * @param finalDate
+     * @param book
+     * @param customer
+     * @param rentCost
+     * @param isReceived 
+     */ 
+    public Rented(int id, Date startDate, Date finalDate, Book book, Customer customer, 
+                  int rentCost, boolean isReceived) {
+        this.id = id;
+        this.startDate = startDate.toLocalDate();
+        this.finalDate = finalDate.toLocalDate();
+        this.book = book;
+        this.customer = customer;
+        this.payment = rentCost;
         this.isReceived = isReceived;
     }
     
@@ -73,20 +140,20 @@ public class Rented {
         return id;
     }
 
-    public LocalDate getStart_date() {
-        return start_date;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date.toLocalDate();
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate.toLocalDate();
     }
 
-    public LocalDate getFinal_date() {
-        return final_date;
+    public LocalDate getFinalDate() {
+        return finalDate;
     }
 
-    public void setFinal_date(Date final_date) {
-        this.final_date = final_date.toLocalDate();
+    public void setFinalDate(Date finalDate) {
+        this.finalDate = finalDate.toLocalDate();
     }
 
     public int getIdCustomer() {
@@ -99,6 +166,10 @@ public class Rented {
 
     public Customer getCustomer() {
         return customer;
+    }
+    
+    public String getCustomerName(){
+        return customer.getName();
     }
 
     public void setCustomer(Customer customer) {

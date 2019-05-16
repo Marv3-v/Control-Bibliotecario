@@ -17,8 +17,13 @@ public class Customer {
     private String address;
 
     
-    public Customer(int idCustomer) {
+    public Customer(int idCustomer, String name) {
         this.id = idCustomer;
+        this.name = name;
+    }
+    
+    public Customer(String name) {
+        this.name = name;
     }
     public Customer(int id, String name, String address, String email) {
         this.id = id;
