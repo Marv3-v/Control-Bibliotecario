@@ -21,16 +21,20 @@ import java.util.List;
  * 
  */
 
-/*
+/**
  * Clase que contiene los métodos CRUD, para administrar libros
+ * @author User
  */
 public class BookDao {
     
 //    Método para añadir un libro
-    /*
-    * Método de la clase Book, utilizado para la creación de un libro
-    * necesita un objeto book
-    */
+    /**
+     * Método de la clase Book, utilizado para la creación de un libro
+     * necesita un objeto book
+     * @param book
+     * @return
+     * @throws ClassNotFoundException 
+     */
     public static boolean addBook(Book book) throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;
@@ -55,10 +59,12 @@ public class BookDao {
         }
     }
     
-    /*
-    * método de la clase Book, sirve para obtener la lista completa de todos los libros
-    * Tipo List<Book>
-    */
+    /**
+     * método de la clase Book, sirve para obtener la lista completa de todos los libros
+     * Tipo List<Book>
+     * @return
+     * @throws ClassNotFoundException 
+     */
     public static List<Book> getBooks() throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;
@@ -93,10 +99,13 @@ public class BookDao {
         
     }
     
-    /*
-    * Método de la clase Book, sirve para filtrar los libros según el tema
-    * requiere un String idTopic
-    */
+    /**
+     * Método de la clase Book, sirve para filtrar los libros según el tema
+     * requiere un String idTopic
+     * @param idTopic
+     * @return
+     * @throws ClassNotFoundException 
+     */
     public static List<Book> getTopicBooks(String idTopic) throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;
@@ -133,9 +142,12 @@ public class BookDao {
         }
     }
     
-    /*
-    * Método de la clase Book, sirve para obtener el detalle de un libro en específico
-    */
+    /**
+     * Método de la clase Book, sirve para obtener el detalle de un libro en específico
+     * @param idBook
+     * @return
+     * @throws ClassNotFoundException 
+     */
     public static Book getBook(String idBook) throws ClassNotFoundException {
        Connection con;
        PreparedStatement ps;
@@ -174,10 +186,15 @@ public class BookDao {
         
     }
     
-    /*
-    * Método clase Book, utilizado para actualizar un libro
-    * 
-    */
+    /**
+     * Método de la clase Book, utilizado para actualizar un libro
+     * @param idBook
+     * @param newTitle
+     * @param newDesc
+     * @param newIdTopic
+     * @return
+     * @throws ClassNotFoundException 
+     */
     public static boolean updateBook(String idBook, String newTitle, String newDesc, String newIdTopic) throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;
@@ -202,7 +219,14 @@ public class BookDao {
 //    Hacer primero la consulta de libros para actualizar las unidades
 //    Este newUnits ya hizo la operación para solo actualizar todo el campo, ya sumó o restó
     
-    
+    /**
+     * Método que sirve para agregar unidades nuevos según el libro, antes se debe realizar la operación para sumar con las anteriores
+     * @param newUnits
+     * @param newAvailables
+     * @param idBook
+     * @return
+     * @throws ClassNotFoundException 
+     */
     public static boolean updateUnits(int newUnits, int newAvailables, String idBook) throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;

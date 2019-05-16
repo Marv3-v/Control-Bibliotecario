@@ -16,8 +16,15 @@ import java.sql.SQLException;
  * @author User
  */
 public class UserDao {
-    
-     public static User getUser(String userName) throws ClassNotFoundException {
+
+    /**
+     * Método que sirve para obtener el usuario que esta registrado
+     *
+     * @param userName
+     * @return
+     * @throws ClassNotFoundException
+     */
+    public static User getUser(String userName) throws ClassNotFoundException {
         String sql = "SELECT user_name, password FROM user WHERE user_name=?";
         Connection con;
         PreparedStatement stmt;
@@ -40,7 +47,7 @@ public class UserDao {
 
         } catch (SQLException e) {
             System.out.println("EL ERROR ES: " + e.getMessage());
-        return null;
+            return null;
         }
     }
 }

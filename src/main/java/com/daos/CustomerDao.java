@@ -21,6 +21,12 @@ public class CustomerDao {
     
     
     //    Método para añadir un cliente
+    /**
+     * Método de CustomerDao, sirve para añadir un cliente
+     * @param customer
+     * @return
+     * @throws ClassNotFoundException 
+     */
     public static boolean addCustomer(Customer customer) throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;
@@ -42,6 +48,12 @@ public class CustomerDao {
         }
     }
     
+    /**
+     * Método para obtener todos los clientes disponibles
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException 
+     */
         public static List<Customer> getAll() throws SQLException, ClassNotFoundException {
         List<Customer> customerList;
         customerList = new ArrayList<>();
@@ -70,6 +82,12 @@ public class CustomerDao {
         }
     }
         
+        /**
+         * Método para obtener un cliente en específico
+         * @param name
+         * @return
+         * @throws ClassNotFoundException 
+         */
     public static List<Customer> findCustomer(String name) throws ClassNotFoundException {
         Connection con;
         PreparedStatement ps;
