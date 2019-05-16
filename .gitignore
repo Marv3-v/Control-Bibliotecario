@@ -3,10 +3,15 @@
 ##########################
 *.class
 .mtj.tmp/
+hs_err_pid*
+# Package Files #
 *.jar
 *.war
+*.nar
 *.ear
-hs_err_pid*
+*.zip
+*.tar.gz
+*.rar
 
 ##########################
 ## Maven
@@ -48,6 +53,8 @@ tmp/
 local.properties
 .loadpath
 
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 ##########################
 ## NetBeans
 ##########################
