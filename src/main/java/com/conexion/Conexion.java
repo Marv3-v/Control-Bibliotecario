@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
+ * Clase Java, sirve para conectar la app web con la base de datos
  * @author User
  */
 public class Conexion {
