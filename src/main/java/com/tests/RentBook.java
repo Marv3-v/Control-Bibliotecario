@@ -21,8 +21,8 @@ public class RentBook {
     
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         
-        Date sqlInicio = Date.valueOf("2019-03-23");
-        Date sqlFinal = Date.valueOf("2019-03-27");
+        Date sqlInicio = Date.valueOf("2019-03-22");
+        Date sqlFinal = Date.valueOf("2019-03-23");
         
 //        No ejecutar hasta asegurarse el número de Disponibles > 0
 
