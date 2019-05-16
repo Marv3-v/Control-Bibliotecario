@@ -5,10 +5,13 @@
  */
 package com.controllers;
 
-import com.daos.UserDao;
-import com.models.User;
+import com.daos.BookDao;
+import com.daos.RentedDao;
+import com.models.Book;
+import com.models.Rented;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -19,11 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *Servlet que verifica el usuario y contraseña
+ *Clase para ver rentas donde los libros ya han sido devueltos
  * @author User
  */
-@WebServlet(name = "LogIn", urlPatterns = {"/LogIn"})
-public class LogIn extends HttpServlet {
+@WebServlet(name = "ShowPreRents", urlPatterns = {"/ShowPreRents"})
+public class ShowPreRents extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,42 +40,35 @@ public class LogIn extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        
-//        Creamos la sesion
-        HttpSession isAuthenticated = request.getSession();
-//        Obtenemos los valores de los input de:
-//        usuario y contrasena
-        String userName, password;
-        userName = request.getParameter("usuario").trim();
-        password = request.getParameter("contrasena").trim();
-//        Datos obtenidos
-        System.out.println(userName);
-        System.out.println(password);
-//        Realizamos la consulta a la base de datos, para saber 
-//        si ese usuario existe
-        User user = UserDao.getUser(userName);
-        
-//        Si el usuario es nulo, entonces no existe
-        if (user == null) {
-            System.out.println("El usuario no existe");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-//            Si existe el usuario
-            System.out.println("Si existe");
+        HttpSession sesion = request.getSession();
+        String idBook = request.getParameter("idBook");
             
-            if(password.equals(user.getPassword())) {
-//            Usuario y contrasena son correctos    
-                System.out.println("Si esta correcto");
-//                request.getRequestDispatcher("Books").forward(request, response);
-                isAuthenticated.setAttribute("isAuthenticated", true);
-//                request.getRequestDispatcher("Books").forward(request,response);
-                response.sendRedirect("Books");
-            } else {
-//                Contrasena incorrecta
-                System.out.println("contraseña incorrecta");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-            
+        List<Rented> rents = RentedDao.getPreviousRents(idBook);
+        Book b = BookDao.getBook(idBook);
+        request.setAttribute("oneBook", b);
+        
+        sesion.setAttribute("id",idBook);
+        
+        request.setAttribute("rents", rents);
+        request.getRequestDispatcher("app/previousRents.jsp").forward(request, response);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ShowPreRents.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +86,7 @@ public class LogIn extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShowPreRents.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *Clase Servlet, que obtiene las listas de todos los libros y así mismo el filtro de cada uno
  * @author User
  */
 @WebServlet(name = "Books", urlPatterns = {"/Books"})
@@ -31,7 +31,7 @@ public class Books extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
-     *
+     *´
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -40,7 +40,7 @@ public class Books extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
 //        Obtenemos el id del tema seleccionado
         String id = request.getParameter("id");
         System.out.println("ID: " + id);
@@ -50,17 +50,16 @@ public class Books extends HttpServlet {
 //        Guarda datos a las listas creadas
         topics = TopicDao.getTopics();
         
-        if(id!= null) {
-            int mitad = books.size()/ 2;
+        if(id != null) {
+            int mitad = books.size() / 2;
             books = BookDao.getTopicBooks(id);
-            
-            request.setAttribute("mitad",mitad);
+
+            request.setAttribute("mitad", mitad);
         } else {
-        books = BookDao.getBooks();
-            
+            books = BookDao.getBooks();
+
         }
-            
-        
+
 //        Se agregan a la petición
         request.setAttribute("id", id);
         request.setAttribute("books", books);

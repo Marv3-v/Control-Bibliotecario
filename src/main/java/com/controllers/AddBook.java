@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *Servlet AddBook, su funcionamiento es agregar un nuevo libro
  * @author User
  */
 @WebServlet(name = "AddBook", urlPatterns = {"/AddBook"})
@@ -27,7 +27,7 @@ public class AddBook extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
-     *
+     * 
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -36,25 +36,24 @@ public class AddBook extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String title = request.getParameter("title").trim();
         String desc = request.getParameter("description").trim();
         String topic = request.getParameter("topics").trim();
         String units = request.getParameter("units").trim();
-        
+
         System.out.println("Tema : " + topic);
         System.out.println("Titulo : " + title);
         System.out.println("desc : " + desc);
         System.out.println("units : " + units);
-        
-        
-        if(!title.equals("") && !desc.equals("") && !topic.equals("") && !units.equals("")) {
-        
+
+        if (!title.equals("") && !desc.equals("") && !topic.equals("") && !units.equals("")) {
+
 //            Hacer consulta para saber las unidades disponibles y asi operar al actualizar 
-            Book book = new Book(title,desc,Integer.parseInt(topic),Integer.parseInt(units), Integer.parseInt(units));
-            if(BookDao.addBook(book)) {
+            Book book = new Book(title, desc, Integer.parseInt(topic), Integer.parseInt(units), Integer.parseInt(units));
+            if (BookDao.addBook(book)) {
                 System.out.println("Query ok!");
-                  response.sendRedirect("Books");
+                response.sendRedirect("Books");
             } else {
                 System.out.println("Error al insertar libro: ");
             }
@@ -62,9 +61,8 @@ public class AddBook extends HttpServlet {
             System.out.println("No puedes ingresar vacío");
             response.sendRedirect("insertBook");
         }
-        
-    }
 
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Clase Servlet para actualizar las unidades generales
  * @author User
  */
 @WebServlet(name = "UpdateUnits", urlPatterns = {"/UpdateUnits"})

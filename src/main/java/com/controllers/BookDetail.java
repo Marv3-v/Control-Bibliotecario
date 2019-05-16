@@ -6,11 +6,14 @@
 package com.controllers;
 
 import com.daos.BookDao;
+import com.daos.RentedDao;
 import com.daos.TopicDao;
 import com.models.Book;
+import com.models.Rented;
 import com.models.Topic;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *Clase Servlet para ver el detalle de un libro
  * @author User
  */
 @WebServlet(name = "BookDetail", urlPatterns = {"/BookDetail"})
@@ -40,17 +43,19 @@ public class BookDetail extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String idBook = request.getParameter("id");
-        
+
         Book book = BookDao.getBook(idBook);
         System.out.println("Book: " + book.getTitle());
-        List<Topic> topics = new ArrayList<>();   
-        topics = TopicDao.getTopics();
+        List<Topic> topics = TopicDao.getTopics();
         int currentUnits = book.getUnits();
         int currentAvailable = book.getAvailableUnits();
-        
-        
+
+        List<Rented> rents = new ArrayList<>();
+        rents = RentedDao.getCurrentRents(idBook);
+        request.setAttribute("currentRents", rents);
+
         request.setAttribute("oneBook", book);
         request.setAttribute("idBook", idBook);
         request.setAttribute("topics", topics);

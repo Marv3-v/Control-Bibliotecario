@@ -5,10 +5,11 @@
  */
 package com.controllers;
 
-import com.daos.UserDao;
-import com.models.User;
+import com.daos.RentedDao;
+import com.models.Rented;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,14 +17,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- *Servlet que verifica el usuario y contraseña
+ *Clase para ver una renta en específico
  * @author User
  */
-@WebServlet(name = "LogIn", urlPatterns = {"/LogIn"})
-public class LogIn extends HttpServlet {
+@WebServlet(name = "RentDetail", urlPatterns = {"/RentDetail"})
+public class RentDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,41 +38,30 @@ public class LogIn extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         
-//        Creamos la sesion
-        HttpSession isAuthenticated = request.getSession();
-//        Obtenemos los valores de los input de:
-//        usuario y contrasena
-        String userName, password;
-        userName = request.getParameter("usuario").trim();
-        password = request.getParameter("contrasena").trim();
-//        Datos obtenidos
-        System.out.println(userName);
-        System.out.println(password);
-//        Realizamos la consulta a la base de datos, para saber 
-//        si ese usuario existe
-        User user = UserDao.getUser(userName);
+        String idRent = request.getParameter("id");
         
-//        Si el usuario es nulo, entonces no existe
-        if (user == null) {
-            System.out.println("El usuario no existe");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-//            Si existe el usuario
-            System.out.println("Si existe");
-            
-            if(password.equals(user.getPassword())) {
-//            Usuario y contrasena son correctos    
-                System.out.println("Si esta correcto");
-//                request.getRequestDispatcher("Books").forward(request, response);
-                isAuthenticated.setAttribute("isAuthenticated", true);
-//                request.getRequestDispatcher("Books").forward(request,response);
-                response.sendRedirect("Books");
-            } else {
-//                Contrasena incorrecta
-                System.out.println("contraseña incorrecta");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-            
+        Rented r = RentedDao.getRentDetail(idRent);
+        
+        request.setAttribute("rentDetail", r);
+        request.getRequestDispatcher("app/rentDetail.jsp").forward(request, response);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RentDetail.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +79,7 @@ public class LogIn extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RentDetail.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

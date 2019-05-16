@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Clase para llevar a cabo la renta de un libro, dar la fecha de inicio y fin de la renta y el cliente
  * @author User
  */
 @WebServlet(name = "RentForm", urlPatterns = {"/RentForm"})

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Clase Servlet para la actualización de un libro, ya sea su nombre, descripción y tema
  * @author User
  */
 @WebServlet(name = "UpdateBook", urlPatterns = {"/UpdateBook"})

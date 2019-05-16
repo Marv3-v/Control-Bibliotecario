@@ -12,14 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- *Método para cerrar Sesión
+ *
  * @author User
  */
-@WebServlet(name = "LogOut", urlPatterns = {"/LogOut"})
-public class LogOut extends HttpServlet {
+@WebServlet(name = "Jenny", urlPatterns = {"/Jenny"})
+public class Jenny extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,9 +33,29 @@ public class LogOut extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        HttpSession se = request.getSession();
-        se.invalidate();
-        response.sendRedirect("/library");
+        
+//        Este cliente viene de un select, y su <select name="cliente">
+//        String cliente = request.getParameter("cliente");
+//        Venta v = new Venta(cliente);
+////        Este método guardara el cliente verdad que compró, y tambien el dao debe guardar la fecha
+//// y todo lo demas de vendedor verdad
+//        boolean inserted = VentaDao.añadirVenta(v);
+//        
+//        if(inserted) {
+////            Si lo guarda entonces
+////            Este método tendra la consulta que te envie
+//            Venta venta = VentaDao.obtenerUltimoRegistro();
+//            
+//            
+////            Ahora el objeto venta tiene el ultimo registro de venta
+////          Le añadis todo el constructor (IDDETALLE, 
+////                                         IDVENTA"
+////                                          que este es el objeto llamado venta.obtenerId()")
+//            DetalleVenta = DetalleVentaDao.añadirDetalle();
+//            
+//            
+//        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

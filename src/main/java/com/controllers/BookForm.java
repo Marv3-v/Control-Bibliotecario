@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *Clase para añadir un nuevo libro, sus unidades y su tema
  * @author User
  */
 @WebServlet(name = "BookForm", urlPatterns = {"/BookForm"})
@@ -38,15 +38,15 @@ public class BookForm extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        List<Topic> topics = new ArrayList<>();   
+        List<Topic> topics = new ArrayList<>();
         topics = TopicDao.getTopics();
-        
+
         request.setAttribute("topics", topics);
 //        Se envian
         request.getRequestDispatcher("app/insertBook.jsp").forward(request, response);
     }
-    
-      // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
