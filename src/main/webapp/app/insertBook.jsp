@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : insertBook
     Created on : Mar 7, 2019, 10:57:26 PM
     Author     : User
@@ -29,13 +29,13 @@
                   .best {
                        background:#4d4d4d;
                        /*background-color: brown;*/
-                       
-                       
+
+
                   }
         </style>
     </head>
     <body>
-               <nav class="navbar is-fixed-top best" role="navigation" aria-label="main navigation">
+<nav class="navbar is-fixed-top best" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item">
       <button onclick="location.href='Books'" class="button">Libros</button>
@@ -52,8 +52,8 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-light">
-            Usuarios
+          <a onClick="location.href='ShowCustomers'" class="button is-light">
+            Clientes
           </a>
           <a class="button is-light">
             Cerrar
@@ -64,11 +64,11 @@
   </div>
 </nav>
 
-        
-        
-        
-         <p class="button" style="margin-left: 3%; margin-top: 5%;" onclick="location.href='Books'">Volver</p>
-        
+
+
+
+         <p class="button is-warning" style="margin-left: 3%; margin-top: 5%;" onclick="location.href='Books'">Volver</p>
+
         <div class="container is-mobile" style="width:50%">
         <h1 class="title">Agregue el libro!</h1>
             <form action="AddBook" method="post">

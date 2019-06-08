@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : previousRents
     Created on : Mar 24, 2019, 6:42:38 PM
     Author     : User
@@ -89,9 +89,9 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-light">
-                                Usuarios
-                            </a>
+                          <a onClick="location.href='ShowCustomers'" class="button is-light">
+                            Clientes
+                          </a>
                             <a class="button is-light">
                                 Cerrar
                             </a>
@@ -101,10 +101,10 @@
             </div>
         </nav>
 
+        <p class="button is-warning" style="margin-left: 3%; margin-top: 5%;" onClick="location.href = 'BookDetail?title=${oneBook.title}&id=${oneBook.id}'">Volver</p>
         <div class="container" style="width:70;margin-top: 4%">
-            <p class="button" style="margin-left: 3%; margin-top: 5%;" onClick="location.href = 'BookDetail?title=${oneBook.title}&id=${oneBook.id}'">Volver</p>
 
-            <table class="table" style="margin-left:auto; margin-right: auto">
+            <table class="table is-fullwidth is-hoverable" style="margin-left:auto; margin-right: auto">
                 <% HttpSession sesion = request.getSession();
                     String idBook = (String) sesion.getAttribute("id");
 
@@ -134,10 +134,10 @@
                         out.println("</tr>");
 
                     }
-                %>  
+                %>
             </table>
 
-        </div>     
+        </div>
         <script>
             (function () {
                 var burger = document.querySelector('.burger');

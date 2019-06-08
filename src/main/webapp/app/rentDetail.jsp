@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : rentDetail
     Created on : Mar 24, 2019, 4:42:31 PM
     Author     : User
@@ -68,7 +68,7 @@
     </head>
     <body>
 
-        <p class="button" style="margin-left: 3%; margin-top: 5%;" onClick="location.href = 'BookDetail?title=${rentDetail.book.title}&id=${rentDetail.book.id}'">Volver</p>
+        <p class="button is-warning" style="margin-left: 3%; margin-top: 5%;" onClick="location.href = 'BookDetail?title=${rentDetail.book.title}&id=${rentDetail.book.id}'">Volver</p>
         <nav class="navbar is-fixed-top best" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item">
@@ -86,8 +86,8 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-light">
-                                Usuarios
+                            <a onClick="location.href='ShowCustomers'" class="button is-light">
+                              Clientes
                             </a>
                             <a class="button is-light">
                                 Cerrar
@@ -120,22 +120,22 @@
 
 
 
-                        <p><b>Fecha inicio:</b>          
-                            ${rentDetail.startDate}          
-                            
+                        <p><b>Fecha inicio:</b>
+                            ${rentDetail.startDate}
+
                         </p>
-                        <p><b>Fecha final:</b>                     
+                        <p><b>Fecha final:</b>
                             ${rentDetail.finalDate}
                             <input type="text" id="finalDate" hidden value="${rentDetail.finalDate}">
                         </p>
-                        <p><b>Costo:</b>           
+                        <p><b>Costo:</b>
                             ${rentDetail.payment}
                         </p>
                         <form action="AddReceivedDate" method="post">
                             <input name="idRent" type="hidden" value="${rentDetail.id}">
                             <label for="receivedDate"><b>Ingrese fecha de entrega</b>   </label>
                             <input  id="receivedDate" onChange="compararFechas()" name="receivedDate" type="date" class="input">
-                            <button class="button is-primary">Guardar fecha</button>
+                            <button class="button is-primary" style="margin-top: 2%">Guardar fecha</button>
                         </form>
 
                         <br>
@@ -165,6 +165,6 @@
                     document.querySelector('#receivedDate').value = finalDate;
                 }
             }
-        </script>  
+        </script>
     </body>
 </html>

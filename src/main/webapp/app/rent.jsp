@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : rent
     Created on : Mar 17, 2019, 9:51:11 PM
     Author     : User
@@ -53,7 +53,7 @@
             .margen-form {
                 margin-bottom: 50px;
             }
-        </style> 
+        </style>
     </head>
     <body>
         <nav class="navbar is-fixed-top best" role="navigation" aria-label="main navigation">
@@ -73,8 +73,8 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-light">
-                                Usuarios
+                            <a onClick="location.href='ShowCustomers'" class="button is-light">
+                              Clientes
                             </a>
                             <a class="button is-light">
                                 Cerrar
@@ -84,13 +84,13 @@
                 </div>
             </div>
         </nav>
-        <p class="button" style="margin-top: 6%;margin-left: 3%;" onClick="location.href = 'BookDetail?libro=${book}&id=${id}'">Volver</p>
+        <p class="button is-warning" style="margin-top: 6%;margin-left: 3%;" onClick="location.href = 'BookDetail?libro=${book}&id=${id}'">Volver</p>
         <div class="container" style="width: 50%">
             <h1 class="title" style="padding: 30px;">Formulario Renta</h1>
 
 
             <div>
-                <form action="AddRent" method="post" class="margen-form">    
+                <form action="AddRent" method="post" class="margen-form">
                     <input type="hidden" name="id" value="${id}">
                     <br>
                     <label for="book">Libro</label>
@@ -102,13 +102,13 @@
                     <label for="finalDate" style="margin-top: 10px">Fecha final</label>
                     <input type="date" id="finalDate" onChange="compararFechas()" required name="finalDate" class="input margen">
                     <br>
-                    <label for="customer" style="margin-top:10px">Cliente que renta</label> 
+                    <label for="customer" style="margin-top:10px">Cliente que renta</label>
                     <div class="select">
                         <select name="customer">
                             <c:forEach items="${customers}" var="c">
                                 <option value="${c.id}" onClick="print(${c.id})">${c.name} | ${c.email}</option>
                             </c:forEach>
-                        </select> 
+                        </select>
                     </div>
                     <br>
 
@@ -116,7 +116,7 @@
                     <input type="number"  readonly value="25" name="payment" class="input margen">
                     <span sty le="margin-top: 20px;margin-bottom: 30px">
                         <!-- Enviar idCliente y idLibro-->
-                        <button class="button margen" style="color: white; background: #4d4d4d">Rentar</button>
+                        <button class="button is-primary margen">Rentar</button>
                     </span>
                 </form>
             </div>
@@ -138,19 +138,19 @@
                 y = n.getFullYear();
                 m = n.getMonth() + 1;
                 d = n.getDate();
-                
+
                 if(d<10) {
                     d='0'+d;
-                } 
+                }
                 if(m<10) {
                     m='0'+m;
-                } 
+                }
                 var date = y + "-" + m + "-" + d;
                 if(document.querySelector('#startDate').value < date) {
                     alert("Escribe una fecha actual en adelante");
                     document.querySelector("#startDate").value = date;
                 }
-            }    
+            }
         </script>
         <script>
             function compararFechas() {
@@ -160,7 +160,7 @@
                     alert("La fecha debe ser mayor o igual a la fecha inicial");
                     document.querySelector("#finalDate").value = startDate;
                 }
-            }    
+            }
         </script>
     </body>
 </html>

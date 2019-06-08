@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : insertTopic
     Created on : Mar 9, 2019, 8:20:45 PM
     Author     : User
@@ -51,8 +51,8 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-light">
-                                Usuarios
+                            <a onClick="location.href='../ShowCustomers'" class="button is-light">
+                              Clientes
                             </a>
                             <a class="button is-light">
                                 Cerrar
@@ -65,12 +65,12 @@
 
 
 
-        <p class="button" style="margin-left: 3%; margin-top: 5%;" onclick="location.href = '../Books'">Volver</p>
+        <p class="button is-warning" style="margin-left: 3%; margin-top: 5%;" onclick="location.href = '../Books'">Volver</p>
         <div class="container" style="width: 50%">
             <h1 class="title">Ingresar tema!</h1>
             <form action="../AddTopic" method="post">
                 <label for="topic">Tema</label>
-                <input class="input" type="text" name="topic"> 
+                <input class="input" type="text" name="topic">
                 <button class="button is-primary" style="margin-top: 10px">Guardar</button>
             </form>
         </div>

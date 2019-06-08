@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : bookdetail
     Created on : Mar 7, 2019, 11:44:17 PM
     Author     : User
@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html>
-    <head>    
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="css/bulma.css">
@@ -82,8 +82,8 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-light">
-                                Usuarios
+                            <a onClick="location.href='ShowCustomers'" class="button is-light">
+                                Clientes
                             </a>
                             <a class="button is-light">
                                 Cerrar
@@ -95,7 +95,7 @@
         </nav>
 
 
-        <p class="button" style="margin-left: 3%; margin-top: 5%;" onclick="location.href = 'Books'">Volver</p>
+        <p class="button is-warning" style="margin-left: 3%; margin-top: 5%;" onclick="location.href = 'Books'">Volver</p>
         <div class="is-rounded" style="margin-top:  20px; display: flex; justify-content: space-around; flex-wrap: wrap">
             <div class="is-mobile card" style="width: 300px; margin-bottom: 30px;">
                 <div class="card-image">
@@ -104,11 +104,11 @@
                     </figure>
                 </div>
                 <div class="card-content">
-                    <div class="media">    
+                    <div class="media">
                         <div class="media-content">
                             <p class="title is-4">${oneBook.title}</p>
                             <p class="subtitle is-6">${oneBook.topicName}</p>
-                            <p class="subtitle is-6"><b>Descripción:</b> ${oneBook.description}</p> 
+                            <p class="subtitle is-6"><b>Descripción:</b> ${oneBook.description}</p>
                             <p class="subtitle is-6"><b>Unidades: </b>${oneBook.units}</p>
                             <p class="subtitle is-6"><b>Disponibles actualmente: </b>${oneBook.availableUnits}</p>
                             <p class="subtitle is-6"><b>Estado: </b>${oneBook.yesNoActive}</p>
@@ -117,14 +117,14 @@
                             <button class="button is-primary" style="color: white; background: #4d4d4d" onClick="location.href = 'RentForm?libro=${oneBook.title}&id=${oneBook.id}'">Rentar libro</button>
                         </div>
                     </div>
-                </div>                         
+                </div>
             </div>
             <div>
 
 
-                <form action="UpdateBook" method="post" class="is-mobile" style="width: 100%">     
+                <form action="UpdateBook" method="post" class="is-mobile" style="width: 100%">
                     <h3 class="title is-4">Actualización</h3>
-                    <div> 
+                    <div>
                         <input type="hidden" name="idB" value="${oneBook.id}">
                         <label for="updatedTitle">Título</label>
                         <input required pattern="([A-z0-9À-ž\s]){2,}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"style="margin-top: 20px; margin-bottom: 20px" class="input" type="text" name="updatedTitle" value="${oneBook.title}">
@@ -141,7 +141,7 @@
                                 <option selected hidden disabled>${oneBook.topicName}</option>
                             </c:forEach>
                         </select>
-                        <br>   
+                        <br>
                     </div>
                     <span>
                         <button class="button is-primary is-size-6-mobile">Actualizar</button>
@@ -168,16 +168,16 @@
 
         <div>
             <div class="container" style="width:97%; margin:auto; margin-bottom: 5%">
-                <span style="text-align:center; margin-bottom: 25px;">     
+                <span style="text-align:center; margin-bottom: 25px;">
                     <h2 class="title">Unidades rentadas actualmente</h2>
                 </span>
-                <table class="table" style="margin-left:auto; margin-right:auto">
+                <table class="table is-fullwidth is-hoverable" style="margin-left:auto; margin-right:auto">
                     <tr>
                         <th>Cliente</th>
                         <th>Fecha Inicio</th>
                         <th>Fecha Final</th>
                         <th>Costo de Renta</th>
-                        <th></th>
+                        <th>Detalle</th>
                     </tr>
                     <c:forEach items="${currentRents}" var="r">
                         <tr>
@@ -191,7 +191,7 @@
                 </table>
 
                 <button style="margin-bottom: 1%" class="button" onClick="location.href = 'ShowPreRents?idBook=${oneBook.id}'">Rentas anteriores</button>
-            </div> 
+            </div>
         </div>
 
 
