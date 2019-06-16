@@ -51,10 +51,8 @@ public class Books extends HttpServlet {
         topics = TopicDao.getTopics();
         
         if(id != null) {
-            int mitad = books.size() / 2;
-            books = BookDao.getTopicBooks(id);
-
-            request.setAttribute("mitad", mitad);
+            
+            books = BookDao.getTopicBooks(id);            
         } else {
             books = BookDao.getBooks();
 

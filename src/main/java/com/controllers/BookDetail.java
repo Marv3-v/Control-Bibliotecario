@@ -48,6 +48,8 @@ public class BookDetail extends HttpServlet {
 
         Book book = BookDao.getBook(idBook);
         System.out.println("Book: " + book.getTitle());
+        
+        
         List<Topic> topics = TopicDao.getTopics();
         int currentUnits = book.getUnits();
         int currentAvailable = book.getAvailableUnits();

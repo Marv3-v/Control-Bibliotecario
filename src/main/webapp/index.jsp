@@ -16,11 +16,11 @@
         <div class="container" style="width:40%; margin-left:auto;margin-right:auto; margin-top: auto">
             <h1 class="title" style="margin-top: 100px;">Iniciar Sesion</h1>
             <form action="LogIn" method="post">
-                <label for="usuario">Usuario: </label>
-                <input class="input" type="text" name="usuario"><br><hr>
-                <label for="contrasena">Contraseña: </label>  
-                <input class="input" type="password" name="contrasena"><hr>
-                <button class="button" type="submit">Entrar</button>
+                
+                <input class="input is-primary" placeholder="Usuario..." type="text" name="usuario"><br><hr>
+                
+                <input class="input is-primary" placeholder="Contraseña..." type="password" name="contrasena"><hr>
+                <button class="button is-primary " type="submit">Entrar</button>
             </form>
         </div>
         <hr>

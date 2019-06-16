@@ -121,17 +121,7 @@
                 </form>
             </div>
         </div>
-        <script>
-            (function () {
-                var burger = document.querySelector('.burger');
-                var nav = document.querySelector('#' + burger.dataset.target);
-
-                burger.addEventListener('click', function () {
-                    burger.classList.toggle('is-active');
-                    nav.classList.toggle('is-active');
-                });
-            })();
-        </script>
+        <script src="http://momentjs.com/downloads/moment.min.js"></script>  
         <script>
             function comprobarFecha() {
                 n =  new Date();
@@ -148,6 +138,7 @@
                 var date = y + "-" + m + "-" + d;
                 if(document.querySelector('#startDate').value < date) {
                     alert("Escribe una fecha actual en adelante");
+                    
                     document.querySelector("#startDate").value = date;
                 }
             }
@@ -159,7 +150,8 @@
                 if(finalDate < startDate) {
                     alert("La fecha debe ser mayor o igual a la fecha inicial");
                     document.querySelector("#finalDate").value = startDate;
-                }
+                }   
+                
             }
         </script>
     </body>
